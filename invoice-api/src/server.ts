@@ -29,7 +29,6 @@ import * as morgan from 'morgan';
 import * as winston from 'winston';
 
 let app: express.Application;
-let config: any;
 let freshbooksAuth: FreshBooksAuth;
 
 app = express();
@@ -47,9 +46,11 @@ const port = process.env.PORT || 4000;
  * Argument Parsing for Config Path and auth file path
  */
 const args = process.argv;
-const configPath = args[2] || 'config.json';
+const configPath = args[2] || 'config.js';
 const authFilePath = args[3] || 'freshbooks.auth';
-config = JSON.parse(fs.readFileSync(configPath).toString());
+const config :any = configPath.endsWith('.js')
+    ? module.require(`${['/', '.'].includes(configPath[0]) ? '' : '../'}${configPath}`)
+    : JSON.parse(fs.readFileSync(configPath).toString());
 /*
  Configure logger
  */

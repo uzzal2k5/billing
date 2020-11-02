@@ -1,7 +1,7 @@
 # Billing API
 
 ## Requirements
-* Python3 & pip
+* Python3.9 & pip
 * MySQL development libraries
 * Virtualenv
 * Docker
@@ -12,7 +12,7 @@
 docker pull sitespeedio/graphite
 docker run -itd --name graphite --restart=always --expose 8080 -p 8080:80 -p 2003:2003 -v ~/.htpasswd:/etc/nginx/.htpasswd -v ~/sajter/billing/graphite/whisper:/opt/graphite/storage/whisper -v ~/sajter/billing/graphite/storage-schemas.conf:/opt/graphite/conf/storage-schemas.conf sitespeedio/graphite
 
-virtualenv -p python3 env
+virtualenv -p python3.9 env
 source env/bin/activate
 pip install -r requirements.txt
 python run.py

@@ -10,7 +10,7 @@ RUN \
   apt-get -y upgrade && \
   apt-get install -y build-essential libssl-dev bash-completion && \
   apt-get install -y curl git man vim wget && \
-  apt-get install -y python3.7 python3.7-dev virtualenv nginx libmysqlclient-dev && \
+  apt-get install -y python3.9 python3.9-dev virtualenv nginx libmysqlclient-dev && \
   apt-get clean
 
 # nvm environment variables
@@ -44,7 +44,7 @@ RUN \
 # API
 WORKDIR /srv/billing-api
 RUN \
-  virtualenv -p python3.7 env && \
+  virtualenv -p python3.9 env && \
   source env/bin/activate && \
   pip install -r requirements.txt && \
   pip install gunicorn

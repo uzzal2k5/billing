@@ -27,15 +27,19 @@
 
 
 ## Running as a Docker Container
-Pull the latest image:
+(Graphite instructions are work in progress)
+Pull the latest images:
 ```bash
+$ docker pull sitespeedio/graphite
+$ docker run --name graphite --restart=always --expose 8080 -p 8080:80 -p 2003:2003 -v <path_to_profile>/.htpasswd:/etc/nginx/.htpasswd -v <path_to_graphite_files>/whisper:/opt/graphite/storage/whisper -v <path_to_graphite_files>/storage-schemas.conf:/opt/graphite/conf/storage-schemas.conf sitespeedio/graphite
+
 $ docker pull collaboratory/billing
 ```
 
-Once ready, you can run the image. The container has nginx listening on port 8080 so you will need to expose this port. Also you should pass in your configuration file. 
+Once ready, you can run the image. The container has nginx listening on port 8080 so you will need to expose this port. Also you should pass in your configuration file.
 
 ```bash
-$ docker run -p <host_port>:8080 -v <path_to_config>/default.py:/srv/billing-api/billing/config/default.py collaboratory/billing 
+$ docker run --link=graphite -p <host_port>:8080 -p <api_port>:5000 --name billing -v <path_to_config>/default.py:/srv/billing-api/billing/config/default.py collaboratory/billing
 ```
 
 The configuration file `default.py` takes the form of:

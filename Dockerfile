@@ -1,6 +1,8 @@
 # Copyright 2020(c) The Ontario Institute for Cancer Research. All rights reserved.
 
-FROM ubuntu:18.04
+FROM ubuntu:20.04
+ENV TZ=America/Toronto
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Install
@@ -10,11 +12,11 @@ RUN \
   apt-get -y upgrade && \
   apt-get install -y build-essential libssl-dev bash-completion && \
   apt-get install -y curl git man vim wget && \
-  apt-get install -y python3.7 python3.7-dev virtualenv nginx libmysqlclient-dev && \
+  apt-get install -y python3.9 python3.9-dev virtualenv nginx libmysqlclient-dev && \
   apt-get clean
 
 # nvm environment variables
-ENV NODE_VERSION 13.6.0
+ENV NODE_VERSION 15.2.0
 ENV NVM_DIR /root/.nvm
 
 # NODE & NPM
@@ -44,7 +46,7 @@ RUN \
 # API
 WORKDIR /srv/billing-api
 RUN \
-  virtualenv -p python3.7 env && \
+  virtualenv -p python3.9 env && \
   source env/bin/activate && \
   pip install -r requirements.txt && \
   pip install gunicorn

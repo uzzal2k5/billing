@@ -14,7 +14,7 @@ RUN \
   apt-get clean
 
 # nvm environment variables
-ENV NODE_VERSION 13.6.0
+ENV NODE_VERSION 14.5.0
 ENV NVM_DIR /root/.nvm
 
 # NODE & NPM

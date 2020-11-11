@@ -1,6 +1,8 @@
 # Copyright 2020(c) The Ontario Institute for Cancer Research. All rights reserved.
 
-FROM ubuntu:18.04
+FROM ubuntu:20.04
+ENV TZ=America/Toronto
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Install
@@ -14,7 +16,7 @@ RUN \
   apt-get clean
 
 # nvm environment variables
-ENV NODE_VERSION 14.5.0
+ENV NODE_VERSION 15.2.0
 ENV NVM_DIR /root/.nvm
 
 # NODE & NPM

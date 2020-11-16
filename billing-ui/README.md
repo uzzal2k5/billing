@@ -2,8 +2,8 @@
 
 ## Requirements
 
-- node v14+
-- npm 6+
+- node v15+
+- npm 7+
 
 Recommend installing node via nvm.
 
